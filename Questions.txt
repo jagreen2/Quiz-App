@@ -1,0 +1,20 @@
+{ question: "Which is the largest US state by area?",
+  options: [Texas, Montana, Alaska, California],
+  answer: "Alaska"
+},
+{ question: "What country is home to the tallest mountain in the world, Mount Everest?",
+  options: [Nepal, India, Pakistan, USA],
+  answer: "Nepal"
+},
+{ question: "By area, what is the smallest country on the planet?",
+  options: [Vatican City, Monaco, Nauru, New Zealand],
+  answer: "Vatican City"
+},
+{ question: "What is the name of the tallest uninterrupted waterfall in the world?",
+  options: [Niagara Falls, Angel Falls, Victoria Falls, Yosemite Falls],
+  answer: "Angel Falls"
+},
+{ question: "Which is the most populous country in the world?",
+  options: [India, Indonesia, China, Russia],
+  answer: "China"
+}
