@@ -1,15 +1,7 @@
-// var state = {
-//   items: []
-// };
+var state = {
+  questionsList: [
 
-// var addItem = function(state, item) {
-//     state.items.push(item);
-// };
-var score = 0;
-
-var questionsList = [
-	
-	{ question: "Which is the largest US state by area?",
+  	{ question: "Which is the largest US state by area?",
 	  options: ["Texas", "Montana", "Alaska", "California"],
 	  correctAnswer: "Alaska"
 	},
@@ -34,15 +26,18 @@ var questionsList = [
 	  correctAnswer: "China"
 	}
 
-]
+  ],
+
+ score: 0
+};
 
 
-function renderQuestion(questionsList, questionNumber){
+function renderQuestion(questionsList, score, questionNumber){
 	var quizForm = $('.quizForm');
 	quizForm.html('');
 	var quizDiv = $('.quizDiv');
 	quizDiv.html(createQuestion(questionsList, questionNumber));
-	addClickEvent(questionNumber);
+	addClickEvent(questionsList, questionNumber, score);
 };
 
 
@@ -65,18 +60,19 @@ function createQuestion(questionsList, questionNumber){
 		    <button class="option option4">
 		    	${questionsList[questionNumber].options[3]}
 		    </button>`
+
 }	
 
 
 function beginQuiz() {
 	$('form').submit(function(event) {
     	event.preventDefault();
-    	renderQuestion(questionsList, 0);
+    	renderQuestion(state.questionsList, state.score, 0);
 	});
 }
 
 
-function addClickEvent(questionNumber) {
+function addClickEvent(questionsList, questionNumber, score) {
 	$('.quizDiv button').click(function(event) {
 		
 		
@@ -91,24 +87,44 @@ function addClickEvent(questionNumber) {
 		}
 
 		$('.score').html(`Your score is ${score}/5.`);
-
+		
 		questionNumber = questionNumber + 1;
 
 		if (questionNumber < 5) {
 			var quizDiv = $('.quizDiv');
 			quizDiv.html('');
-			renderQuestion(questionsList, questionNumber);
+			renderQuestion(questionsList, score, questionNumber);
 		} else {
-			$('.text').html('');
-			var quizDiv = $('.quizDiv');
-			quizDiv.html('');
-			quizDiv.html(`<button class="resetQuiz">Retake Quiz</button>`);
+			//$('.text').html('');
+			//var quizDiv = $('.quizDiv');
+			//quizDiv.html('');
+			var retakeQuizButton = $('.retakeQuizButton');
+
+			retakeQuizButton.html(`<button class="resetQuiz">Retake Quiz</button>`);
+
+			addRetakeQuizClickEvent();
+
 		}
 		
 	});
 }
 
 beginQuiz();
-$('.resetQuiz').click(function(event) {
-	beginQuiz();
-});
+
+function addRetakeQuizClickEvent() {
+	$('.retakeQuizButton button').click(function(event) {
+		debugger;
+		var quizForm = $('.quizForm');
+		quizForm.html('');
+		var quizDiv = $('.quizDiv');
+		quizDiv.html('');
+		$('.text').html('');
+		$('.score').html('');
+		quizForm.html(`<h1>Geography Quiz</h1>
+			<button class="startQuizButton">Start Quiz</button>`);
+		var retakeQuizButton = $('.retakeQuizButton');
+
+		retakeQuizButton.html('');
+		beginQuiz();
+	});
+}
